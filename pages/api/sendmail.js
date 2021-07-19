@@ -14,13 +14,9 @@ const sendEmailHandler = (req, res) => {
     </div>`,
   };
 
-  transporter.sendMail(mailData, (info, err) => {
-    if (err) res.status(500).send({ err });
-    else console.log(info);
-  });
-
-  res.status(200).send({
-    message: "Email sended!",
+  transporter.sendMail(mailData, (err, info) => {
+    if (err) return res.status(500).send({ err });
+    else res.status(200).send({ message: "Email sended!" });
   });
 };
 
